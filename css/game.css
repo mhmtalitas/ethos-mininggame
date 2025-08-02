@@ -1,0 +1,496 @@
+/* TAM EKRAN RESET */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Oyun sayfası stilleri - TAM EKRAN */
+.game-container {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.game-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#gameCanvas {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    cursor: none;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+#particleCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+.pickaxe-cursor {
+    position: absolute;
+    pointer-events: none;
+    font-size: 2rem;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+}
+
+
+
+/* PROFESYONEL SAĞ BUTONLAR */
+.side-buttons {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    z-index: 100;
+}
+
+.side-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    border: none;
+    color: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: 90px;
+    min-height: 90px;
+    justify-content: center;
+    position: relative;
+}
+
+/* Shimmer efekti kaldırıldı - ana sayfa stilinde tutarlılık için */
+
+.side-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ff5252, #d84315);
+}
+
+.side-btn:active {
+    transform: translateY(-1px);
+}
+
+.side-btn span:first-child {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.btn-text {
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Buton renk varyasyonları - Ana sayfadaki tasarım stilinde */
+.side-btn.home-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.side-btn.home-btn:hover {
+    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+    box-shadow: 0 12px 20px rgba(102, 126, 234, 0.4);
+}
+
+.side-btn.replay-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.side-btn.replay-btn:hover {
+    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+    box-shadow: 0 12px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Disabled durum - ana sayfa stilinde */
+.side-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    background: linear-gradient(45deg, #666, #555);
+}
+
+.side-btn:disabled:hover {
+    transform: none;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #666, #555);
+}
+
+
+
+
+
+/* Kaya stilleri */
+.rock {
+    position: absolute;
+    transition: all 0.1s ease;
+}
+
+.rock.hit {
+    animation: rockHit 0.3s ease;
+}
+
+@keyframes rockHit {
+    0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    25% { transform: scale(1.05) rotate(2deg); filter: brightness(1.2); }
+    50% { transform: scale(0.98) rotate(-1deg); filter: brightness(1.1); }
+    75% { transform: scale(1.02) rotate(1deg); filter: brightness(1.05); }
+    100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+}
+
+.rock.cracking {
+    animation: rockCrack 0.5s ease forwards;
+}
+
+@keyframes rockCrack {
+    0% { 
+        transform: scale(1); 
+        filter: brightness(1) contrast(1);
+    }
+    50% { 
+        transform: scale(1.1); 
+        filter: brightness(1.3) contrast(1.2);
+    }
+    100% { 
+        transform: scale(1.05); 
+        filter: brightness(1.1) contrast(1.1);
+    }
+}
+
+.rock.exploding {
+    animation: rockExplode 1s ease forwards;
+}
+
+@keyframes rockExplode {
+    0% { 
+        transform: scale(1.05) rotate(0deg); 
+        opacity: 1;
+    }
+    30% { 
+        transform: scale(1.2) rotate(5deg); 
+        opacity: 0.9;
+    }
+    60% { 
+        transform: scale(1.3) rotate(-3deg); 
+        opacity: 0.5;
+    }
+    100% { 
+        transform: scale(0) rotate(360deg); 
+        opacity: 0;
+    }
+}
+
+/* Ethereum OS logo reveal */
+.eth-logo {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 0;
+    z-index: 99999 !important;
+    text-align: center !important;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.eth-logo h2, .eth-logo p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.logo-container {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.eth-logo.reveal {
+    animation: logoReveal 2s ease forwards;
+}
+
+/* 🏆 GOLDEN LOGO ÖZEL STİLLER (RARE!) */
+.golden-logo {
+    position: relative;
+}
+
+.golden-logo::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: goldenPulse 2s ease-in-out infinite;
+    z-index: -1;
+}
+
+.golden-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.1) 50%, transparent 100%);
+    border-radius: 50%;
+    animation: goldenAura 3s ease-in-out infinite;
+    z-index: -2;
+}
+
+.golden-logo .logo-container {
+    animation: goldenFloat 4s ease-in-out infinite;
+    position: relative;
+    z-index: 10;
+}
+
+.logo-container {
+    position: relative;
+    z-index: 5;
+}
+
+.golden-logo .logo-container img {
+    filter: drop-shadow(0 0 30px #FFD700) drop-shadow(0 0 50px rgba(255,215,0,0.5)) !important;
+}
+
+.normal-logo .logo-container img {
+    filter: drop-shadow(0 0 20px #667eea) drop-shadow(0 0 30px rgba(102,126,234,0.5)) !important;
+}
+
+.golden-logo h2 {
+    animation: goldenTextGlow 2s ease-in-out infinite alternate;
+}
+
+/* GOLDEN ANIMASYONLAR */
+@keyframes goldenPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+@keyframes goldenAura {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+        opacity: 0.4;
+    }
+}
+
+@keyframes goldenFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(-2deg);
+    }
+}
+
+@keyframes goldenTextGlow {
+    0% {
+        text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+    }
+    100% {
+        text-shadow: 0 0 30px #FFD700, 0 0 50px #FFD700, 0 0 70px #FFD700, 0 0 90px #FFD700;
+    }
+}
+
+/* Normal logo reveal animasyonu */
+@keyframes logoReveal {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(180deg);
+        opacity: 0;
+        filter: blur(20px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+        opacity: 0.8;
+        filter: blur(5px);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+/* PERFECT MOBİL RESPONSIVE */
+@media (max-width: 768px) {
+    .game-container {
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .game-area {
+        padding: 0;
+    }
+    
+    #gameCanvas {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    
+    #particleCanvas {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    
+    .pickaxe-cursor {
+        font-size: 1.5rem;
+    }
+    
+    /* Mobilde butonları daha iyi konumlandır */
+    .side-buttons {
+        right: 1rem;
+        top: auto;
+        bottom: 2rem;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 1rem;
+    }
+    
+    .side-btn {
+        min-width: 75px;
+        min-height: 75px;
+        padding: 1rem 0.8rem;
+        border-radius: 18px;
+    }
+    
+    .side-btn span:first-child {
+        font-size: 1.4rem;
+    }
+    
+    .btn-text {
+        font-size: 0.65rem;
+        letter-spacing: 0.3px;
+    }
+    
+    .side-btn:hover {
+        transform: translateY(-3px);
+    }
+}
+
+/* Küçük ekranlar için - daha da optimize */
+@media (max-width: 480px) {
+    .game-area {
+        padding: 0;
+    }
+    
+    #gameCanvas {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    
+    #particleCanvas {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    
+    .side-buttons {
+        bottom: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .side-btn {
+        min-width: 70px;
+        min-height: 70px;
+        padding: 0.8rem 0.8rem;
+        border-radius: 35px;
+    }
+    
+    .side-btn span:first-child {
+        font-size: 1.2rem;
+    }
+    
+    .btn-text {
+        font-size: 0.6rem;
+        letter-spacing: 0.2px;
+    }
+}
+
+/* Çok küçük ekranlar */
+@media (max-width: 360px) {
+    .side-buttons {
+        gap: 0.6rem;
+    }
+    
+    .side-btn {
+        min-width: 60px;
+        min-height: 60px;
+    }
+}

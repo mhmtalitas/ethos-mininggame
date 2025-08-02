@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum OS - Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div class="game-container">
+
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            
+            <!-- Pickaxe cursor -->
+            <div class="pickaxe-cursor" id="pickaxeCursor">⛏️</div>
+            
+            <!-- Particle effects -->
+            <canvas id="particleCanvas" width="800" height="600"></canvas>
+        </div>
+
+        <!-- Game buttons on the right side -->
+        <div class="side-buttons">
+            <button class="side-btn home-btn" id="homeBtn">
+                <span>🏠</span>
+                <span class="btn-text">Home</span>
+            </button>
+            <button class="side-btn replay-btn" id="playAgainBtn">
+                <span>🔄</span>
+                <span class="btn-text">Play Again</span>
+            </button>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
