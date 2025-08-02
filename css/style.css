@@ -58,9 +58,19 @@ header {
 .hero-title {
     font-size: 4rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     animation: glow 2s ease-in-out infinite alternate;
+}
+
+.hero-game-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #a78bfa;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease 0.3s both;
+    letter-spacing: 1px;
 }
 
 @keyframes glow {

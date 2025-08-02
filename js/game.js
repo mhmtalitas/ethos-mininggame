@@ -331,9 +331,9 @@ function createExplosion() {
 function revealEthereumLogo() {
     gameState = 'finished';
     
-    // Logo drop chance hesapla - %5 Golden, %95 Normal
+    // Logo drop chance hesapla - %1 Golden, %99 Normal (ULTRA RARE!)
     const randomChance = Math.random();
-    const isGoldenDrop = randomChance < 0.05; // %5 şans (RARE!)
+    const isGoldenDrop = randomChance < 0.01; // %1 şans (ULTRA RARE!)
     
     console.log(`Logo drop: ${isGoldenDrop ? 'GOLDEN (rare!)' : 'Normal'} - Chance: ${randomChance.toFixed(3)}`);
     
